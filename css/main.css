@@ -1,0 +1,22 @@
+body{
+  padding: 0;
+}
+
+.film-list{
+  width: 50vw;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  list-style: none;
+}
+
+.film{
+  background: #bde0ff;
+  padding: 5px;
+}
+
+.film input[type=text]{
+  border: 0;
+  border-bottom: 1px solid gray;
+  background: transparent;
+}
