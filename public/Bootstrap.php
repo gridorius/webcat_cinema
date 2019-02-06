@@ -1,5 +1,6 @@
 <?php
 $controllers = glob('../controllers/*');
-foreach ($controllers as $controller)
-  include_once($controller);
+$lib = glob('../lib/*');
+foreach ($controllers + $lib as $file)
+  include_once($file);
 ?>

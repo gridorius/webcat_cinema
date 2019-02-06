@@ -1,7 +1,7 @@
 <?php
 
 class Home{
-  public function index(Request $r, $id){
+  public function index(){
     Response::view('home.html');
   }
 }
