@@ -1,5 +1,5 @@
 <?php
-class films{
+class Films{
   public function get(){
     $db = new DB('cimena', 'root', '');
     $table = $db->table('film');

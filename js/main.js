@@ -3,9 +3,17 @@ function ffetch(url, settings = {}){
   let query = fetch(url, settings);
   query.then(r=>{
     if(!r.ok)
-      r.json().then(console.log);
-  })
+      r.text().then(logError);
+  });
   return query;
+}
+
+function logError(text){
+  try{
+    console.log(JSON.parse(text));
+  }catch(err){
+    console.log(text);
+  }
 }
 
 function setToken(settings){
