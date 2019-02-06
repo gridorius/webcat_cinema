@@ -6,9 +6,8 @@ class Films{
   }
 
   public function add(Request $r){
-    $name = $r->name;
-    $duration = $r->duration;
-    return '';
+    $params = $r->asArray('name', 'duration');
+    DB::film()->insert()->setValues($params)->execute();
   }
 }
 ?>

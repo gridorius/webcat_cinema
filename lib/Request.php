@@ -7,5 +7,12 @@ class Request{
     }else
       return $_POST[$name];
   }
+
+  public function asArray(){
+    $array = [];
+    foreach(func_get_args() as $name)
+      $array[$name] = $this->{$name};
+    return $array;
+  }
 }
 ?>
