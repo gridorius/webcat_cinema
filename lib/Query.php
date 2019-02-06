@@ -1,4 +1,5 @@
 <?php
+include_once 'Collection.php';
 interface Executable
 {
   public function execute();
@@ -13,6 +14,16 @@ class Query implements Executable{
   public function __construct($table){
     $this->table = $table;
     $this->db = $table->getDB();
+  }
+
+  public function getWhere(){
+    if(empty($this->where))
+      return '';
+    else return 'WHERE '.$this->where;
+  }
+
+  public function __toString(){
+    return $this->execute()->__toString();
   }
 
   public function setValues($array){
@@ -55,7 +66,7 @@ class Update extends Query{
       $values[] = $value;
     }
 
-    $query = 'UPDATE '.$this->table->name.' SET '.join(', ', $params).' WHERE '.$this->where;
+    $query = 'UPDATE '.$this->table->name.' SET '.join(', ', $params).' '.$this->getWhere();
     $this->db->execute($query, $values);
   }
 }
@@ -69,14 +80,14 @@ class Select extends Query{
   }
 
   public function execute(){
-    $query = 'SELECT '.$this->params.' FROM '.$this->table->name.' WHERE '.$this->where;
-    return $this->db->executeRetObjects($query, $values);
+    $query = 'SELECT '.$this->params.' FROM '.$this->table->name.' '.$this->getWhere();
+    return new Collection($this->db->executeRetObjects($query, $values));
   }
 }
 
 class Delete extends Query{
   public function execute(){
-    $query = 'DELETE FROM '.$this->table->name.' WHERE '.$this->where;
+    $query = 'DELETE FROM '.$this->table->name.' '.$this->getWhere();
     $this->db->execute($query, $values);
   }
 }

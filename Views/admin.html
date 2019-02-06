@@ -2,12 +2,19 @@
 <html lang="ru" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Home</title>
+    <title>Админ панель</title>
     <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/vue.js" charset="utf-8"></script>
     <script src="/js/main.js" charset="utf-8"></script>
   </head>
   <body>
+    <div class="admin-panel">
 
+        <ul class="film-list" v-for='film in films'>
+          <li class="film">{{ film.name }} {{film.duration}}</li>
+        </ul>
+
+    </div>
     <script src="/js/admin.js" charset="utf-8"></script>
   </body>
 </html>
