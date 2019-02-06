@@ -9,8 +9,7 @@ class Home{
   }
 
   public function test(){
-    $db = new DB('cimena', 'root', '');
-    $table = $db->table('film');
+    $table = DB::table('film');
     $rows = $table->delete()->where("name = 'film26'")->execute();
   }
 }

@@ -23,13 +23,15 @@ if(count($url) == 0){
 
   $listParam[] = $url[2];
 
+  $db = new DB('cimena', 'root', '');
+
   $controller = $class->newInstance();
   $method->invokeArgs($controller, $listParam);
 }
 
 }catch(Exception|ReflectionException|PDOException $error){
   Response::addHeader('content-type: application/json');
-  Response::setStatusCode('500', $error->getMessage());
+  // Response::setStatusCode('500', $error->getMessage());
   Response::write(json_encode([
     'error' => $error->getMessage()
   ]));

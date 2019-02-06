@@ -9,10 +9,16 @@
   </head>
   <body>
     <div class="admin-panel">
-
-        <ul class="film-list" v-for='film in films'>
-          <li class="film">{{ film.name }} {{film.duration}}</li>
+        <h2>Фильмы</h2>
+        <ul class="film-list" >
+          <li class="film" v-for='film in films'>{{ film.name }}; Длительность - {{film.duration}} часов</li>
         </ul>
+        <h3> Добавить фильм </h3>
+          <form name='newfilm' @submit.prevent='addFilm'>
+            <input type="text" name='name' placeholder="Наименование">
+            <input type="text" name='duration' placeholder="Длительность">
+            <input type="submit" value="Добавить">
+          </form>
 
     </div>
     <script src="/js/admin.js" charset="utf-8"></script>
