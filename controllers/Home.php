@@ -8,7 +8,7 @@ class Home{
   public function test(){
     $db = new DB('cimena', 'root', '');
     $table = $db->table('film');
-    $table->insert()->setValues(['name' => 'film6', 'duration' => '60'])->execute();
+    $rows = $table->delete()->where("name = 'film26'")->execute();
   }
 }
 
