@@ -1,7 +1,7 @@
 <?php
 class Session{
   public function get(){
-    $table = DB::table('session');
+    $table = DB::session();
     Response::write($table->select());
   }
 }

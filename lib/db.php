@@ -2,10 +2,15 @@
 class DB{
   private static $connection;
   private static $context;
+
   public function __construct($database, $login, $password){
     static::$connection = new PDO("mysql:dbname=$database;host=localhost", $login, $password);
     static::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     static::$context = $this;
+  }
+
+  public static function __callStatic($name, $params){
+    return static::table($name);
   }
 
   public static function table($table_name){

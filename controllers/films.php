@@ -1,7 +1,7 @@
 <?php
 class Films{
   public function get(){
-    $table = DB::table('film');
+    $table = DB::film();
     Response::write($table->select()->params('name', 'duration'));
   }
 

@@ -9,7 +9,7 @@ class Home{
   }
 
   public function test(){
-    $table = DB::table('film');
+    $table = DB::film();
     $rows = $table->delete()->where("name = 'film26'")->execute();
   }
 }
