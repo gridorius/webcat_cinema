@@ -1,11 +1,11 @@
 <?php
 class Home{
   public function index(){
-    Response::view('home.html');
+    return view('home.html');
   }
 
   public function admin(){
-    Response::view('admin.html');
+    return view('admin.html');
   }
 
   public function test(){

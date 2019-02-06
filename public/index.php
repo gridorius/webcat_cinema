@@ -26,7 +26,8 @@ if(count($url) == 0){
   $db = new DB('cimena', 'root', '');
 
   $controller = $class->newInstance();
-  $method->invokeArgs($controller, $listParam);
+  $response = $method->invokeArgs($controller, $listParam);
+  Response::write($response);
 }
 
 }catch(Exception|ReflectionException|PDOException $error){

@@ -9,7 +9,7 @@ class Response{
   }
 
   public function view($path){
-    static::write(file_get_contents('../Views/'.$path));
+    return file_get_contents('../Views/'.$path);
   }
 
   public static function setStatusCode($code, $text = 'OK'){
