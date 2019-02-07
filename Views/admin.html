@@ -10,16 +10,87 @@
   <body>
     <div class="admin-panel">
         <h2>Фильмы</h2>
-        <ul class="film-list" >
-          <li class="film" v-for='film in films'>{{ film.name }}; Длительность - {{film.duration}} часов</li>
-        </ul>
+        <table>
+          <tr>
+            <th>Номер</th>
+            <th>Наименование</th>
+            <th>Длительность</th>
+            <th>Посетителей всего</th>
+            <th>В среднем за сеанс</th>
+            <th>Сумма сбора</th>
+          </tr>
+          <tr v-for='(film, i) in films'>
+            <td>{{ i }}</td>
+            <td>{{ film.name }}</td>
+            <td>{{ film.duration }}</td>
+            <td>{{ film.tickets}}</td>
+            <td>{{ film.avg_from_session || 0 }}</td>
+            <td>{{ film.total_price }}</td>
+          </tr>
+          <tr>
+            <td> Итого </td>
+            <td> ... </td>
+            <td> ... </td>
+            <td>{{ films.reduce((o, c)=>parseInt(c.tickets) + o, 0) }}</td>
+            <td>{{ films.reduce((o, c)=>parseInt(c.avg_from_session || 0) + o, 0) }}</td>
+            <td>{{ films.reduce((o, c)=>parseInt(c.total_price) + o, 0) }}</td>
+          </tr>
+        </table>
+        <h3>Конфликты сессий</h3>
+        <table>
+          <tr>
+            <th>Фильм1</th>
+            <th>Время начала</th>
+            <th>Длительность</th>
+            <th>Фильм2</th>
+            <th>Время начала</th>
+            <th>Длительность</th>
+          </tr>
+          <tr v-for='conflict in sessionConflicts'>
+            <td>{{ conflict.name1 }}</td>
+            <td>{{ conflict.start1 }}</td>
+            <td>{{ conflict.duration1 }}</td>
+            <td>{{ conflict.name2 }}</td>
+            <td>{{ conflict.start2 }}</td>
+            <td>{{ conflict.duration2 }}</td>
+          </tr>
+        </table>
+        <h3>Перерывы между фильмами</h3>
+        <table>
+          <tr>
+            <th>Фильм1</th>
+            <th>Время начала</th>
+            <th>Длительность</th>
+            <th>Время начала второго фильма</th>
+            <th>Длительность перерыва</th>
+          </tr>
+          <tr v-for='timeout in bigTimeouts'>
+            <td>{{ timeout.name1 }}</td>
+            <td>{{ timeout.start1 }}</td>
+            <td>{{ timeout.duration1 }}</td>
+            <td>{{ timeout.start2 }}</td>
+            <td>{{ timeout.timeout }}</td>
+          </tr>
+        </table>
+        <h3> Общие кассовые сборы и посетители по времени </h3>
+        <table>
+          <tr>
+            <th>время</th>
+            <th>Посетителей</th>
+            <th>Сборы</th>
+          </tr>
+          <tr v-for='tam in timeAndMoney'>
+            <td>{{ tam.time_zone }}</td>
+            <td>{{ tam.tickets || 0}}</td>
+            <td>{{ tam.total_price || 0}}</td>
+          </tr>
+        </table>
         <h3> Добавить фильм </h3>
-          <form name='newfilm' @submit.prevent='addFilm'>
-            <input type="text" name='name' placeholder="Наименование">
-            <input type="text" name='duration' placeholder="Длительность">
-            <input type="submit" value="Добавить">
-          </form>
-
+        <form name='newfilm' @submit.prevent='addFilm'>
+          <input type="text" name='name' placeholder="Наименование">
+          <input type="text" name='duration' placeholder="Длительность">
+          <input type="submit" value="Добавить">
+        </form>
     </div>
     <script src="/js/admin.js" charset="utf-8"></script>
   </body>

@@ -1,8 +1,7 @@
 <?php
 class Films{
   public function get(){
-    $table = DB::film();
-    return $table->select()->params('name', 'duration');
+    return new Collection(DB::executeRetObjects(GET_FILMS_INFO, []));
   }
 
   public function add(Request $r){
